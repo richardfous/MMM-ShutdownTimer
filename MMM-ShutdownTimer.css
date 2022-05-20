@@ -1,0 +1,9 @@
+.MMM-ShutdownTimer .timeLeft {
+  Font-size: 30px;
+  color: #72b8ff;
+}
+
+.MMM-ShutdownTimer .timerText {
+  font-size: 30px;
+  color: white;
+}
