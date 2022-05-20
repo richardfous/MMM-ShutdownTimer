@@ -2,8 +2,8 @@ Module.register("MMM-ShutdownTimer", {
     defaults: {
         url: "192.168.0.200/5/off", 			       
         hoursLeft: 0,
-        minutesLeft: 1,
-        secondsLeft: 1,
+        minutesLeft: 10,
+        secondsLeft: 0,
         updateInterval: 1000,
         timerText: "Zbývající čas do vypnutí",
     },
