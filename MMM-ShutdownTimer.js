@@ -23,6 +23,7 @@ Module.register("MMM-ShutdownTimer", {
             this.config.secondsLeft = 60;
         }
         
+        this.stopRequests = false;
         this.remainingTime = this.config.hoursLeft*60*60*1000 + this.config.minutesLeft*60*1000 + this.config.secondsLeft*1000 ;
         
         //Lowest update interval can be 1 sec.
@@ -42,23 +43,18 @@ Module.register("MMM-ShutdownTimer", {
     },
 
     getDom: function () {
-        
-        this.remainingTime = this.remainingTime - 1000;
 
-        if(this.remainingTime < 1000){
-            //var website = window.open(this.config.url);
-            //website.close();
-            var xHttp = new XMLHttpRequest();
-            xHttp.open( "GET", this.config.url, false );
-            xHttp.send();
-            
-            var wrapperUrl = document.createElement("div");
-            var headerD = document.createElement("span");
-            headerD.innerHTML = this.config.url + "</br>";
-            headerD.className = "timerText";
-            wrapperUrl.appendChild(headerD);
-            clearTimeout(this.interval); 
-            return wrapperUrl;
+        if(this.remainingTime <= 1000){
+            if(this.stopRequests == false){
+                this.stopRequests == true;
+                var xHttp = new XMLHttpRequest();
+                xHttp.open( "GET", this.config.url, false );
+                xHttp.send();
+                clearTimeout(this.interval); 
+            }
+            return;
+        }else {
+             this.remainingTime = this.remainingTime - 1000;
         }
 
         var wrapper = document.createElement("div");
