@@ -46,10 +46,19 @@ Module.register("MMM-ShutdownTimer", {
         this.remainingTime = this.remainingTime - 1000;
 
         if(this.remainingTime < 1000){
-            var website = window.open(this.config.url);
-            website.close();
-            clearTimeout(this.interval);            
-            return;
+            //var website = window.open(this.config.url);
+            //website.close();
+            var xHttp = new XMLHttpRequest();
+            xHttp.open( "GET", this.config.url, false );
+            xHttp.send();
+            
+            var wrapperUrl = document.createElement("div");
+            var headerD = document.createElement("span");
+            headerD.innerHTML = this.config.url + "</br>";
+            headerD.className = "timerText";
+            wrapperUrl.appendChild(headerD);
+            clearTimeout(this.interval); 
+            return wrapperUrl;
         }
 
         var wrapper = document.createElement("div");
